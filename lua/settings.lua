@@ -1,16 +1,22 @@
-vim.o.updatetime = 400
-vim.o.matchtime = 8
+vim.cmd[[set updatetime=500]]
+vim.cmd[[set matchtime=3]]
 
--- Line Numbering
-vim.o.number = true
-vim.o.relativenumber = true
+vim.cmd[[set completeopt=menuone,noinsert]]
 
--- Indentation configuration
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
+vim.cmd[[set number]]
+vim.cmd[[set relativenumber]]
+vim.cmd[[set numberwidth=4]]
+vim.cmd[[set signcolumn=yes:2]]
+vim.cmd[[set nowrap]]
+vim.cmd[[set cursorline]]
 
--- Searching
-vim.o.hlsearch = true
-vim.o.incsearch = true
 
+vim.cmd[[set hlsearch]]
+vim.cmd[[set incsearch]]
+
+vim.cmd[[set tabstop=4]]
+vim.cmd[[set shiftwidth=4]]
+vim.cmd[[set expandtab]]
+
+vim.cmd[[set noshowmode]]
+vim.cmd[[set cmdheight=2]]
