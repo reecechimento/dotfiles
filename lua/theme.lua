@@ -9,7 +9,7 @@ vim.o.syntax = 'on'
 -- Lua
 require('onedark').setup  {
     -- Main options --
-    style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
     transparent = false,  -- Show/hide background
     term_colors = true, -- Change terminal color as per the selected theme style
     ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
@@ -21,11 +21,11 @@ require('onedark').setup  {
     -- Options are italic, bold, underline, none
     -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
     code_style = {
-        comments = 'italic',
+        comments = 'none',
         keywords = 'bold',
-        functions = 'bold',
+        functions = 'standout',
         strings = 'none',
-        variables = 'italic'
+        variables = 'none'
     },
 
     -- Custom Highlights --
