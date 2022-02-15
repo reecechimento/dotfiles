@@ -10,7 +10,6 @@ vim.cmd[[set signcolumn=yes:2]]
 vim.cmd[[set nowrap]]
 vim.cmd[[set cursorline]]
 
-
 vim.cmd[[set hlsearch]]
 vim.cmd[[set incsearch]]
 
@@ -20,3 +19,12 @@ vim.cmd[[set expandtab]]
 
 vim.cmd[[set noshowmode]]
 vim.cmd[[set cmdheight=2]]
+
+vim.cmd[[set foldenable]]
+vim.cmd[[set foldmethod=indent]]
+vim.cmd[[set lazyredraw]]
+
+vim.cmd[[set scrolloff=3]]
+
+vim.o.pumheight = 8
+vim.o.pumwidth = 20
