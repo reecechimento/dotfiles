@@ -8,13 +8,12 @@ require'packer'.startup(function()
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'nvim-lua/plenary.nvim' }
     use { 'neovim/nvim-lspconfig' } -- Collection of configurations for the built-in LSP client
-
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     -- SECTION: treesitter modules
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'p00f/nvim-ts-rainbow' }
     use { 'JoosepAlviste/nvim-ts-context-commentstring' }
     use { 'haringsrob/nvim_context_vt' }
-
+    -- SECTION: autocompletion
     use { 'ms-jpq/coq_nvim', branch = 'coq' }
     use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
     use { 'ms-jpq/coq.thirdparty', branch = '3p' }
@@ -36,19 +35,12 @@ require'packer'.startup(function()
 
     use { 'machakann/vim-sandwich' }
     use { 'machakann/vim-highlightedyank' }
-
     use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
-
     use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap' }
-
     use { 'navarasu/onedark.nvim' }  -- NOTE: Favorite colorscheme
-
     use { 'nvim-lualine/lualine.nvim', requires = { { 'kyazdani42/nvim-web-devicons', opt = true }, } }
-
     use { 'chentau/marks.nvim' }
-
     use { 'norcalli/nvim-colorizer.lua' }
-
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
@@ -56,7 +48,6 @@ require'packer'.startup(function()
             require 'config.gitsigns'
         end
     }
-
     use {
         'folke/todo-comments.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } },
@@ -81,13 +72,26 @@ require'packer'.startup(function()
 
     use { 'habamax/vim-asciidoctor' }
 
-    use{ 'anuvyklack/pretty-fold.nvim',
+    use { 
+        'anuvyklack/pretty-fold.nvim',
         config = function()
             require('pretty-fold').setup{}
             require('pretty-fold.preview').setup()
         end
     }
 
+    use {
+        'nacro90/numb.nvim',
+        config = function()
+            require('numb').setup {
+                show_numbers = true,
+                show_cursorline = true,
+                number_only = false
+            }
+        end
+    } 
+
+    use { 'yamatsum/nvim-cursorline' }
 end)
 
 require'nvim-web-devicons'.setup {}
