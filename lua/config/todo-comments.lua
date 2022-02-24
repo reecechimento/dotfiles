@@ -14,7 +14,7 @@ require'todo-comments'.setup {
         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
         PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        SECTION = { icon = "", color = "hint" }
+        SECTION = { icon = "", color = "info", alt = { "II" } }
     },
     merge_keywords = true, -- when true, custom keywords will be merged with the defaults
     -- highlighting of the line containing the todo comment
@@ -53,4 +53,4 @@ require'todo-comments'.setup {
         pattern = [[\b(KEYWORDS):]], -- ripgrep regex
         -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
     },
-} 
+}

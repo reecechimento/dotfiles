@@ -1,120 +1,151 @@
 vim.cmd[[set termguicolors]]
-require 'settings'
-require 'keybinds'
+
+-- NOTE: :s:\v(\{|\})::g
 
 local use = require'packer'.use
 require'packer'.startup(function()
-    use { 'wbthomason/packer.nvim' } -- Package manager
-    use { 'kyazdani42/nvim-web-devicons' }
-    use { 'nvim-lua/plenary.nvim' }
-    use { 'neovim/nvim-lspconfig' } -- Collection of configurations for the built-in LSP client
-    -- SECTION: treesitter modules
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'p00f/nvim-ts-rainbow' }
-    use { 'JoosepAlviste/nvim-ts-context-commentstring' }
-    use { 'haringsrob/nvim_context_vt' }
-    -- SECTION: autocompletion
-    use { 'ms-jpq/coq_nvim', branch = 'coq' }
-    use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
-    use { 'ms-jpq/coq.thirdparty', branch = '3p' }
 
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {
-            {'nvim-lua/plenary.nvim'},
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-            { 'kyazdani42/nvim-web-devicons' },
-        }
+  -- II: Dependencies
+  use 'wbthomason/packer.nvim'  -- Package manager
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'ryanoasis/vim-devicons'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  use 'neovim/nvim-lspconfig'
+
+  -- II: treesitter modules
+  use  'p00f/nvim-ts-rainbow'
+  use  'JoosepAlviste/nvim-ts-context-commentstring'
+  -- use  'haringsrob/nvim_context_vt'
+
+  -- II: autocompletion
+  use { 'ms-jpq/coq_nvim', branch = 'coq' }
+  use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
+  use { 'ms-jpq/coq.thirdparty', branch = '3p' }
+
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { 'kyazdani42/nvim-web-devicons' },
     }
+  }
 
-    use {
-        'kosayoda/nvim-lightbulb',
-        requires = { { 'neovim/nvim-lspconfig' } }
-    }
+  use {
+    'kosayoda/nvim-lightbulb',
+    requires = { { 'neovim/nvim-lspconfig' } }
+  }
 
-    use { 'machakann/vim-sandwich' }
-    use { 'machakann/vim-highlightedyank' }
-    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
-    use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap' }
-    use { 'navarasu/onedark.nvim' }  -- NOTE: Favorite colorscheme
-    use { 'nvim-lualine/lualine.nvim', requires = { { 'kyazdani42/nvim-web-devicons', opt = true }, } }
-    use { 'chentau/marks.nvim' }
-    use { 'norcalli/nvim-colorizer.lua' }
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require 'config.gitsigns'
-        end
-    }
-    use {
-        'folke/todo-comments.nvim',
-        requires = { { 'nvim-lua/plenary.nvim' } },
-        config = function()
-            require 'config.todo-comments'
-        end
-    }
+  use  'machakann/vim-sandwich'
+  use  'machakann/vim-highlightedyank'
+  use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
+  use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap' }
 
-    use {
-        'romgrk/nvim-treesitter-context',
-        config = function()
-            require 'config.treesitter-context'
-        end
-    }
+  -- Colorscheme
+  use 'navarasu/onedark.nvim'   -- II: Favorite colorscheme
+  use 'tiagovla/tokyodark.nvim'
+  use 'yashguptaz/calvera-dark.nvim'
 
-    use {
-        'windwp/nvim-autopairs',
-        config = function()
-            require 'config.autopairs'
-        end
-    }
+  use { 'nvim-lualine/lualine.nvim', requires = { { 'kyazdani42/nvim-web-devicons', opt = true }, } }
+  use  'chentau/marks.nvim'
+  use  'norcalli/nvim-colorizer.lua'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require 'config.gitsigns'
+    end
+  }
+  use {
+    'folke/todo-comments.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    config = function()
+      require 'config.todo-comments'
+    end
+  }
 
-    use { 'habamax/vim-asciidoctor' }
+  use {
+    'romgrk/nvim-treesitter-context',
+    config = function()
+      require 'config.treesitter-context'
+    end
+  }
 
-    use { 
-        'anuvyklack/pretty-fold.nvim',
-        config = function()
-            require('pretty-fold').setup{}
-            require('pretty-fold.preview').setup()
-        end
-    }
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require 'config.autopairs'
+    end
+  }
 
-    use {
-        'nacro90/numb.nvim',
-        config = function()
-            require('numb').setup {
-                show_numbers = true,
-                show_cursorline = true,
-                number_only = false
-            }
-        end
-    } 
+  use  'habamax/vim-asciidoctor'
 
-    use { 'yamatsum/nvim-cursorline' }
+  use {
+    'anuvyklack/pretty-fold.nvim',
+    config = function()
+      require('pretty-fold').setup{}
+      require('pretty-fold.preview').setup()
+    end
+  }
+
+  use {
+    'nacro90/numb.nvim',
+    config = function()
+      require('numb').setup {
+        show_numbers = true,
+        show_cursorline = true,
+        number_only = false
+      }
+    end
+  }
+
+  use  'yamatsum/nvim-cursorline'
+
+  -- UI
+  use 'stevearc/dressing.nvim'
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require'goto-preview'.setup {}
+    end
+  }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function() require'nvim-tree'.setup {} end
+  }
+
+    use 'tmhedberg/SimpylFold'
+
 end)
 
 require'nvim-web-devicons'.setup {}
 
 
--- NOTE: lualine setup
+-- II: lualine setup
 require'lualine'.setup {
-    options = {
-        icons_enabled = true,
-        theme = 'onedark',
-    }
+  options = {
+    icons_enabled = true,
+    theme = 'onedark',
+  }
 }
 
--- NOTE: marks setup
+-- II: marks setup
 require'marks'.setup {}
 
--- NOTE: colorizer setup
+-- II: colorizer setup
 require'colorizer'.setup {}
 
--- NOTE: wfxr/minimap.vim configuration
-vim.g.minimap_width = 10
-vim.g.minimap_auto_start = 1
-vim.g.minimap_auto_start_win_enter = 1
+-- II: wfxr/minimap.vim configuration
+vim.g.minimap_width = 20
+vim.g.minimap_auto_start = 0
+vim.g.minimap_auto_start_win_enter = 0
 vim.g.minimap_left = 0
 vim.g.minimap_highlight_range = 1
 vim.g.minimap_highlight_search = 1
@@ -124,30 +155,30 @@ vim.g.minimap_git_colors = 1
 require'telescope'.setup {}
 require'telescope'.load_extension('fzf')
 
--- NOTE: treesitter configuration
+-- II: treesitter configuration
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained",
-    highlight = {
-        enable = true,
-        disable = { "rust" },
-    },
-    indent = {
-        enable = false
-    },
-    rainbow = {
-        enable = true,
-        -- disable = {},
-        extended_mode = true,
-        max_file_lines= nil,
-        -- colors = {},
-        -- termcolors = {},
-    },
-    context_commentstring = {
-        enable = true
-    }
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+    disable = { "rust" },
+  },
+  indent = {
+    enable = false
+  },
+  rainbow = {
+    enable = true,
+    -- disable = {},
+    extended_mode = true,
+    max_file_lines= nil,
+    -- colors = {},
+    -- termcolors = {},
+  },
+  context_commentstring = {
+    enable = true
+  }
 }
 
--- NOTE: COQ and LSP configuration
+-- II: COQ and LSP configuration
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
 -- Mappings.
@@ -161,63 +192,49 @@ vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<C
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 local nvim_lsp = require "lspconfig"
 local coq = require "coq" -- add this
 
--- lsp.<server>.setup(<stuff...>)                              -- before
--- lsp.<server>.setup(coq.lsp_ensure_capabilities(<stuff...>)) -- after
--- nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities())
-
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'vimls', 'bashls' }
+local servers = { 'pylsp', 'vimls', 'bashls', 'ccls', 'jsonls', 'yamlls', 'dockerls', 'html' }
 for _, lsp in pairs(servers) do
-    nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
-        on_attach = on_attach,
-        flags = {
-            -- This will be the default in neovim 0.7+
-            debounce_text_changes = 150,
-        }
-    }))
+  nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+  }))
 end
 
-
-
--- local runtime_path = vim.split(package.path, ';')
--- table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.lua")
-
--- SECTION: sumneko lua
+-- II: sumneko lua
 nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
     on_attach = on_attach,
-    cmd = {"/home/rchimento/tools/lua-language-server/bin/lua-language-server"};
+    cmd = {"/home/rchimento/tools/lua-language-server/bin/lua-language-server"},
     settings = {
         Lua = {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
                 -- Setup your lua path
-                path = runtime_path,
+                -- path = runtime_path,
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
@@ -226,8 +243,8 @@ nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
             -- workspace = {
                 -- Make the server aware of Neovim runtime files
                 -- library = vim.api.nvim_get_runtime_file("", true),
-            -- },
-            -- Do not send telemetry data containing a randomized but unique identifier
+                -- },
+                -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
                 enable = false,
             },
@@ -237,8 +254,11 @@ nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
 
 
 -- Set colorscheme
-require 'theme'
+require 'theme'.onedark()
 
--- NOTE: 'kosayoda/nvim-lightbulb',
+-- II: 'kosayoda/nvim-lightbulb',
 vim.cmd[[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
+require 'settings'
+require 'keybinds'
+require 'config.simpylfold'
