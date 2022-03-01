@@ -1,3 +1,4 @@
+
 vim.cmd[[set termguicolors]]
 
 -- NOTE: :s:\v(\{|\})::g
@@ -16,8 +17,8 @@ require'packer'.startup(function()
   use 'neovim/nvim-lspconfig'
 
   -- II: treesitter modules
-  use  'p00f/nvim-ts-rainbow'
-  use  'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'p00f/nvim-ts-rainbow'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
   -- use  'haringsrob/nvim_context_vt'
 
   -- II: autocompletion
@@ -40,8 +41,8 @@ require'packer'.startup(function()
     requires = { { 'neovim/nvim-lspconfig' } }
   }
 
-  use  'machakann/vim-sandwich'
-  use  'machakann/vim-highlightedyank'
+  use 'machakann/vim-sandwich'
+  use 'machakann/vim-highlightedyank'
   use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
   use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap' }
 
@@ -82,7 +83,7 @@ require'packer'.startup(function()
     end
   }
 
-  use  'habamax/vim-asciidoctor'
+  use 'habamax/vim-asciidoctor'
 
   use {
     'anuvyklack/pretty-fold.nvim',
@@ -103,7 +104,7 @@ require'packer'.startup(function()
     end
   }
 
-  use  'yamatsum/nvim-cursorline'
+  use 'yamatsum/nvim-cursorline'
 
   -- UI
   use 'stevearc/dressing.nvim'
@@ -181,6 +182,10 @@ require'nvim-treesitter.configs'.setup {
 -- II: COQ and LSP configuration
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
+
+local nvim_lsp = require "lspconfig"
+local coq = require "coq" -- add this
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -207,9 +212,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
-
-local nvim_lsp = require "lspconfig"
-local coq = require "coq" -- add this
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -254,11 +256,12 @@ nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
 
 
 -- Set colorscheme
-require 'theme'.onedark()
+require'theme'.onedark()
 
--- II: 'kosayoda/nvim-lightbulb',
+-- II: 'kosayoda/nvim-lightbulb'
 vim.cmd[[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 require 'settings'
 require 'keybinds'
 require 'config.simpylfold'
+
