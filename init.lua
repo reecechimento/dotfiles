@@ -1,4 +1,3 @@
-
 vim.cmd[[set termguicolors]]
 
 -- NOTE: :s:\v(\{|\})::g
@@ -124,18 +123,13 @@ require'packer'.startup(function()
 
     use 'tmhedberg/SimpylFold'
 
+    use 'preservim/vim-markdown'
+
 end)
 
 require'nvim-web-devicons'.setup {}
 
 
--- II: lualine setup
-require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'onedark',
-  }
-}
 
 -- II: marks setup
 require'marks'.setup {}
@@ -175,13 +169,31 @@ require'nvim-treesitter.configs'.setup {
     -- termcolors = {},
   },
   context_commentstring = {
-    enable = true
-  }
+    enable = true,
+  },
 }
 
 -- II: COQ and LSP configuration
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
+-- SECTION: coq.thirdparty sources
+require('coq_3p') {
+    { src = "nvimlua", short_name = "nLUA" },
+    { src = "vimtex", short_name = "vTEX" },
+    { src = "copilot", short_name = "COP", accept_key = "<c-f>" },
+    {
+        src = "repl",
+        sh = "zsh",
+        shell = { p = "perl", n = "node", ... },
+        max_lines = 99,
+        deadline = 500,
+        unsafe = { "rm", "poweroff", "mv", ... },
+    },
+    -- Evaluates `...`
+    -- Where <ctrl chars> can be a combination of zero or more of:
+    -- # :: comment output
+    -- - :: prevent indent
+}
 
 local nvim_lsp = require "lspconfig"
 local coq = require "coq" -- add this
@@ -255,8 +267,6 @@ nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
 }))
 
 
--- Set colorscheme
-require'theme'.onedark()
 
 -- II: 'kosayoda/nvim-lightbulb'
 vim.cmd[[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
@@ -264,4 +274,16 @@ vim.cmd[[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lig
 require 'settings'
 require 'keybinds'
 require 'config.simpylfold'
+
+-- Set colorscheme
+require'theme'.onedark()
+
+-- II: lualine setup
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'onedark',
+  }
+}
+
 

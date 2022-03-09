@@ -21,7 +21,7 @@ vim.o.showmode = false
 vim.o.cmdheight = 4
 
 vim.o.foldenable = true
-vim.o.foldmethod = 'indent'
+-- vim.o.foldmethod = 'indent'
 vim.o.shortmess = 'filnxtToOFc'
 vim.o.lazyredraw = true
 vim.o.autowriteall = true
