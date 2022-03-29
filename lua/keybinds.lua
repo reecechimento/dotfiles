@@ -12,8 +12,8 @@ vim.cmd[[nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 vim.cmd[[nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>]]
 
 
-vim.cmd[[nnoremap <C-n> :NvimTreeToggle<CR>]]
-vim.cmd[[nnoremap <leader>r :NvimTreeRefresh<CR>]]
+-- vim.cmd[[nnoremap <C-n> :NvimTreeToggle<CR>]]
+-- vim.cmd[[nnoremap <leader>r :NvimTreeRefresh<CR>]]
 vim.cmd[[nnoremap <F5> :w \| !python3 %<CR>]]
 vim.cmd[[nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>]]
 vim.cmd[[nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>]]

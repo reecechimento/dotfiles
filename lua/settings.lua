@@ -18,7 +18,7 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 vim.o.showmode = false
-vim.o.cmdheight = 4
+vim.o.cmdheight = 2
 
 vim.o.foldenable = true
 -- vim.o.foldmethod = 'indent'
